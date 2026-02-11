@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishmael Munyalo| CS Student Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="dot active" onclick="scrollToSection('hero')" title="Home">
+            <span class="tooltip">Home</span>
+        </div>
+        <div class="dot" onclick="scrollToSection('about')" title="About">
+            <span class="tooltip">About</span>
+        </div>
+        <div class="dot" onclick="scrollToSection('projects')" title="Projects">
+            <span class="tooltip">Projects</span>
+        </div>
+        <div class="dot" onclick="scrollToSection('plans')" title="Plans">
+            <span class="tooltip">Plans</span>
+        </div>
+        <div class="dot" onclick="scrollToSection('experience')" title="Experience">
+            <span class="tooltip">Experience</span>
+        </div>
+        <div class="dot" onclick="scrollToSection('contact')" title="Contact">
+            <span class="tooltip">Contact</span>
+        </div>
+        
+        <!-- Edit Toggle (Triggers Login) -->
+        <div class="edit-toggle-btn" id="edit-toggle" onclick="openLoginModal()" title="Edit Portfolio">
+            <i class="fas fa-pen"></i>
+        </div>
+    </div>
+
+    <!-- Save Button (Hidden by default) -->
+    <button id="save-btn" onclick="saveData()"><i class="fas fa-save"></i> Save Changes</button>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="glass-neon modal-content">
+            <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+            <h3 style="color:white; margin-bottom: 20px;"><i class="fas fa-lock"></i> Admin Access</h3>
+            <div class="modal-form-group">
+                <label>Enter Password</label>
+                <input type="password" id="admin-password" placeholder="******" onkeypress="handleEnter(event)">
+            </div>
+            <button class="btn" onclick="checkPassword()" style="width:100%; justify-content: center;">Login</button>
+            <p id="login-error" style="color: #ff4444; margin-top: 10px; display: none;">Incorrect Password</p>
+        </div>
+    </div>
+
+    <!-- Project Image Upload Input -->
+    <input type="file" id="project-image-upload" accept="image/*" style="display: none;">
+
+    <!-- Add Project Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="glass-neon modal-content">
+            <span class="close-modal" onclick="closeProjectModal()">&times;</span>
+            <h3 style="color:white; margin-bottom: 20px;">Add New Project</h3>
+            <div class="modal-form-group">
+                <label>Project Title</label>
+                <input type="text" id="new-proj-title" placeholder="e.g. AI Chatbot">
+            </div>
+            <div class="modal-form-group">
+                <label>Description</label>
+                <textarea id="new-proj-desc" rows="3" placeholder="Short description..."></textarea>
+            </div>
+            <div class="modal-form-group">
+                <label>Image URL (or leave blank for random)</label>
+                <input type="text" id="new-proj-img" placeholder="https://...">
+            </div>
+            <div class="modal-form-group">
+                <label>Tech Stack (comma separated)</label>
+                <input type="text" id="new-proj-tech" placeholder="React, Node, Python">
+            </div>
+            <div class="modal-form-group">
+                <label>Code Link (GitHub)</label>
+                <input type="text" id="new-proj-code" placeholder="#">
+            </div>
+            <div class="modal-form-group">
+                <label>Demo Link</label>
+                <input type="text" id="new-proj-demo" placeholder="#">
+            </div>
+            <button class="btn" onclick="addProject()" style="width:100%">Add Project</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="glass-neon nav-container">
+            <a href="#hero" class="logo editable">&lt;Ishmael<span class="code-font">Munyalo</span>/&gt;</a>
+            
+            <nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#plans" class="nav-link">Plans</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="role editable">Hello, I'm a</span>
+                    <h1 class="editable">Computer Science<br>Student & Developer</h1>
+                    <p class="editable">I build accessible, pixel-perfect and performant web applications. Passionate about solving complex problems through code.</p>
+                    <div class="hero-buttons">
+                        <!-- Linking to Projects Section -->
+                        <a href="#projects" class="btn">View Projects</a>
+                        <!-- Linking to Contact Section -->
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+    
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="profile-wrapper" onclick="triggerFileUpload()">
+                        <!-- Default Placeholder (Visible when no image) -->
+                        <div class="profile-placeholder" id="profile-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Upload Photo</span>
+                        </div>
+                        
+                        <!-- Actual Image (Hidden by default) -->
+                        <img id="profile-img" src="" alt="Profile">
+                        
+                        <div class="upload-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <input type="file" id="file-upload" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container">
+            <h2 class="section-title editable">About Me</h2>
+            <div class="about-grid">
+                <div class="glass-neon">
+                    <div class="about-text" style="padding: 30px;">
+                        <p class="editable">
+                            I am a third-year Computer Science student at <strong>State University</strong> with a deep interest in Full Stack Development and Machine Learning. 
+                        </p>
+                        <p class="editable">
+                            My journey began with simple HTML sites, but I've since expanded my expertise to building complex React applications and Python backend systems. I love the logic behind coding and the creativity required to design user-friendly interfaces.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <h3 class="editable" style="color:white; margin-bottom:20px;">Technical Skills</h3>
+                    
+                    <div class="skill-category">
+                        <h4>Languages</h4>
+                        <div class="tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">SQL</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Frameworks & Tools</h4>
+                        <div class="tags">
+                            <span class="tag">React.js</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Django</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container">
+            <div style="display:flex; justify-content:space-between; align-items:end;">
+                <h2 class="section-title editable">Featured Projects</h2>
+                <!-- Add Project Button (Visible in Edit Mode) -->
+                <button id="add-proj-btn" class="btn btn-outline" style="display:none; padding: 8px 15px; font-size: 0.9rem;" onclick="openProjectModal()">
+                    <i class="fas fa-plus"></i> Add Project
+                </button>
+            </div>
+            
+            <div class="projects-grid" id="projects-grid">
+                <!-- Project 1 -->
+                <article class="glass-neon project-card">
+                    <div class="project-img" onclick="triggerProjectImageUpload(this)" data-project-index="0">
+                        <img src="https://picsum.photos/seed/project1/600/400" alt="Project 1">
+                        <div class="edit-image-overlay">
+                            <div class="edit-image-btn">
+                                <i class="fas fa-camera"></i>
+                                <span>Change Image</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="editable">Algorithm Visualizer</h3>
+                        <p class="editable">An interactive web application that visualizes sorting and pathfinding algorithms in real-time.</p>
+                        <div class="project-tech">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Algorithms</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="action-btn btn-code"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="action-btn btn-demo"><i class="fas fa-rocket"></i> Demo</a>
+                            <a href="#" class="action-btn btn-docs"><i class="fas fa-book"></i> Docs</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="glass-neon project-card">
+                    <div class="project-img" onclick="triggerProjectImageUpload(this)" data-project-index="1">
+                        <img src="https://picsum.photos/seed/project2/600/400" alt="Project 2">
+                        <div class="edit-image-overlay">
+                            <div class="edit-image-btn">
+                                <i class="fas fa-camera"></i>
+                                <span>Change Image</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="editable">E-Commerce API</h3>
+                        <p class="editable">A scalable backend API for an e-commerce platform featuring authentication and payments.</p>
+                        <div class="project-tech">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">MongoDB</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="action-btn btn-code"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="action-btn btn-demo"><i class="fas fa-rocket"></i> Demo</a>
+                            <a href="#" class="action-btn btn-docs"><i class="fas fa-book"></i> Docs</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Future Plans Section -->
+        <section id="plans" class="container">
+            <h2 class="section-title editable">Future Plans</h2>
+            <div class="glass-neon" style="padding: 40px;">
+                <div class="plans-list" id="plans-list">
+                    <div class="plan-item">
+                        <div class="plan-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="plan-text">
+                            <h4 class="editable">Graduate with Honors</h4>
+                            <p class="editable">Focus on AI and Machine Learning coursework to build a strong theoretical foundation.</p>
+                        </div>
+                    </div>
+                    <div class="plan-item">
+                        <div class="plan-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="plan-text">
+                            <h4 class="editable">Full Time Role</h4>
+                            <p class="editable">Secure a position as a Junior Software Engineer at a tech-forward company.</p>
+                        
+                    </div>
+                </div>
+        
+                <button id="add-plan-btn" class="btn btn-outline" style="display:none; margin-top:20px;" onclick="addPlan()">+ Add Plan</button>
+            </div>
+        </section>
+
+        <section id="experience" class="container">
+            <h2 class="section-title editable">Experience</h2>
+            <div class="glass-neon timeline-card">
+                <div class="timeline-item">
+                    <span class="timeline-date editable">June 2023 - Present</span>
+                    <h3 class="editable">Software Engineer Intern</h3>
+                    <h4 class="editable">TechStart Inc.</h4>
+                    <p class="editable">Collaborated with the frontend team from Moringa school to refactor legacy code using React. Improved page load times by 20%.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date editable">Sep 2021 - Present</span>
+                    <h3 class="editable">B.S. Computer Science</h3>
+                    <h4 class="editable"> University of Embu</h4>
+                    <p class="editable">Relevant Coursework: Data Structures, Algorithms, OS, DBMS, AI.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2 class="section-title editable">Get In Touch</h2>
+            <div class="glass-neon contact-wrapper">
+                <div class="contact-info">
+                    <h3 class="editable">Let's Connect</h3>
+                    <p class="editable">I'm currently looking for internships and entry-level software engineering roles. Reach out via email or social media!</p>
+                    
+                    <div class="info-item" style="margin-bottom: 25px;">
+                        <strong style="color:white;">Email:</strong> 
+                        <a href="mailto:ishmaelmunyalo4@gmail.com" class="editable" style="color: var(--neon-cyan);">ishmaelmunyalo4@gmail.com</a>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-btn github"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/0794113987" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/absolute_dev_015" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@absolutecoder" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! (Demo)');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; justify-content: center;">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 30px 0; color: #64748b; font-size: 0.9rem;">
+        <p>&copy; 2026 Ishmael Munyalo. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
