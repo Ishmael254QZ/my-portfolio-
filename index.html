@@ -5,25 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ishmael Munyalo| CS Student Portfolio</title>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Project CSS -->
+  
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Background Blobs -->
+    
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="dot active" onclick="scrollToSection('hero')" title="Home">
             <span class="tooltip">Home</span>
@@ -44,16 +43,16 @@
             <span class="tooltip">Contact</span>
         </div>
         
-        <!-- Edit Toggle (Triggers Login) -->
+    
         <div class="edit-toggle-btn" id="edit-toggle" onclick="openLoginModal()" title="Edit Portfolio">
             <i class="fas fa-pen"></i>
         </div>
     </div>
 
-    <!-- Save Button (Hidden by default) -->
+ 
     <button id="save-btn" onclick="saveData()"><i class="fas fa-save"></i> Save Changes</button>
 
-    <!-- Login Modal -->
+
     <div id="login-modal" class="modal-overlay">
         <div class="glass-neon modal-content">
             <span class="close-modal" onclick="closeLoginModal()">&times;</span>
@@ -67,10 +66,10 @@
         </div>
     </div>
 
-    <!-- Project Image Upload Input -->
+
     <input type="file" id="project-image-upload" accept="image/*" style="display: none;">
 
-    <!-- Add Project Modal -->
+
     <div id="project-modal" class="modal-overlay">
         <div class="glass-neon modal-content">
             <span class="close-modal" onclick="closeProjectModal()">&times;</span>
@@ -103,7 +102,6 @@
         </div>
     </div>
 
-    <!-- Header -->
     <header>
         <div class="glass-neon nav-container">
             <a href="#hero" class="logo editable">&lt;Ishmael<span class="code-font">Munyalo</span>/&gt;</a>
@@ -125,7 +123,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -133,9 +130,9 @@
                     <h1 class="editable">Computer Science<br>Student & Developer</h1>
                     <p class="editable">I build accessible, pixel-perfect and performant web applications. Passionate about solving complex problems through code.</p>
                     <div class="hero-buttons">
-                        <!-- Linking to Projects Section -->
+                        
                         <a href="#projects" class="btn">View Projects</a>
-                        <!-- Linking to Contact Section -->
+                       
                         <a href="#contact" class="btn btn-outline">Contact Me</a>
     
                     </div>
@@ -143,13 +140,12 @@
                 
                 <div class="hero-image">
                     <div class="profile-wrapper" onclick="triggerFileUpload()">
-                        <!-- Default Placeholder (Visible when no image) -->
+                        
                         <div class="profile-placeholder" id="profile-placeholder">
                             <i class="fas fa-camera"></i>
                             <span>Upload Photo</span>
                         </div>
-                        
-                        <!-- Actual Image (Hidden by default) -->
+                    
                         <img id="profile-img" src="" alt="Profile">
                         
                         <div class="upload-overlay">
@@ -161,14 +157,14 @@
             </div>
         </section>
 
-        <!-- About Section -->
+        
         <section id="about" class="container">
             <h2 class="section-title editable">About Me</h2>
             <div class="about-grid">
                 <div class="glass-neon">
                     <div class="about-text" style="padding: 30px;">
                         <p class="editable">
-                            I am a third-year Computer Science student at <strong>State University</strong> with a deep interest in Full Stack Development and Machine Learning. 
+                            I am a third-year Computer Science student at <strong> University of <span>Embu</span></strong> with a deep interest in Full Stack Development and Machine Learning. 
                         </p>
                         <p class="editable">
                             My journey began with simple HTML sites, but I've since expanded my expertise to building complex React applications and Python backend systems. I love the logic behind coding and the creativity required to design user-friendly interfaces.
@@ -183,7 +179,8 @@
                         <h4>Languages</h4>
                         <div class="tags">
                             <span class="tag">JavaScript</span>
-                            <span class="tag">TypeScript</span>
+                            <span class="tag">C++</span>
+                            <span class="tag">HTML/CSS</span>
                             <span class="tag">Python</span>
                             <span class="tag">Java</span>
                             <span class="tag">SQL</span>
@@ -205,18 +202,15 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="container">
             <div style="display:flex; justify-content:space-between; align-items:end;">
                 <h2 class="section-title editable">Featured Projects</h2>
-                <!-- Add Project Button (Visible in Edit Mode) -->
                 <button id="add-proj-btn" class="btn btn-outline" style="display:none; padding: 8px 15px; font-size: 0.9rem;" onclick="openProjectModal()">
                     <i class="fas fa-plus"></i> Add Project
                 </button>
             </div>
             
             <div class="projects-grid" id="projects-grid">
-                <!-- Project 1 -->
                 <article class="glass-neon project-card">
                     <div class="project-img" onclick="triggerProjectImageUpload(this)" data-project-index="0">
                         <img src="https://picsum.photos/seed/project1/600/400" alt="Project 1">
@@ -242,10 +236,9 @@
                     </div>
                 </article>
 
-                <!-- Project 2 -->
                 <article class="glass-neon project-card">
                     <div class="project-img" onclick="triggerProjectImageUpload(this)" data-project-index="1">
-                        <img src="https://picsum.photos/seed/project2/600/400" alt="Project 2">
+                        <img src="https://www.bing.com/images/search?view=detailV2&ccid=uvwp2dug&id=D507DCD96DA586C54D2CF4826B606C4095E78674&thid=OIP.uvwp2dugfDrZtEGXHkscLAHaEJ&mediaurl=https%3A%2F%2Fwww.itm.co.za%2FPortals%2F67%2FeCommerce-Web-Design.jpg&cdnurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.bafc29d9dba07c3ad9b441971e4b1c2c%3Frik%3DdIbnlUBsYGuC9A%26pid%3DImgRaw%26r%3D0&exph=1076&expw=1920&q=ecommerce&FORM=IRPRST&ck=9E16A3444ACF71BC9D084C5552997B1C&selectedIndex=0&itb=0&cw=606&ch=579&ajaxhist=0&ajaxserp=0" alt="Project 2">
                         <div class="edit-image-overlay">
                             <div class="edit-image-btn">
                                 <i class="fas fa-camera"></i>
