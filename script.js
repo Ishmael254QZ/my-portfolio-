@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadContent() {
-    // Check if user has saved data
+
     const savedHero = localStorage.getItem('portfolio_hero');
     const savedProjects = localStorage.getItem('portfolio_projects');
     const savedPlans = localStorage.getItem('portfolio_plans');
